@@ -1,17 +1,48 @@
 import React from "react";
 import Head from 'next/head';
 import NextLink from 'next/link';
-import { AppBar, Container, Link, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Container, Link, Toolbar, Typography, createMuiTheme, ThemeProvider, CssBaseline } from "@material-ui/core";
 import useStyles from "../utils/style";
 
 
-const Layout = ({children}) => {
+const Layout = ({ title, description, children}) => {
+    const theme = createMuiTheme({
+        typography: {
+            h1: {
+                fontSize: '1.6rem',
+                fontWeight: 400,
+                margin: '1rem 0',
+            },
+            h2: {
+                fontSize: '1.4rem',
+                fontWeight: 400,
+                margin: '1rem 0',
+            },
+            body1: {
+                fontWeight: 'normal'
+            },
+        },
+        palette: {
+            type: 'light',
+            primary: {
+                main: '#f0c000',
+            },
+            secondary: {
+                main: '#208080',
+            }
+        }
+    });
     const classes = useStyles();
     return ( 
         <div>
-            <Head>
-                <title> RuS shop</title>
+            <Head> 
+                <title> {title? `${title} - RuS shop` : 'RuS shop'} </title>
+                {description && <meta name="description" content={description}></meta> }
             </Head>
+
+            <ThemeProvider theme={theme}>
+            <CssBaseline />
+            
             <AppBar position="static" className={classes.navbar} >
                 <Toolbar>
                     <NextLink href="/" passHref> 
@@ -40,6 +71,8 @@ const Layout = ({children}) => {
                     All rights resevered. RuS shop
                 </Typography>
             </footer>
+            </ThemeProvider>
+
         </div>
      );
 }
