@@ -11,8 +11,7 @@ import NextLink from 'next/link';
 import Layout from '../components/Layout';
 import data from '../utils/data';
 
-// const SegfaultHandler = require('segfault-handler');
-// SegfaultHandler.registerHandler('crash.log');
+
 
 export default function Home() {
   return (
